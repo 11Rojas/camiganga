@@ -1,8 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function Hero() {
   return (
@@ -25,40 +23,6 @@ export default function Hero() {
                     className="object-contain"
                   />
                 </div>
-              </div>
-            </div>
-            
-            {/* Texto y botón al lado */}
-            <div className="text-white space-y-3 text-center md:text-left w-full md:w-auto">
-              {/* Ubicación */}
-              <p className="text-white text-base md:text-lg font-sans mb-2">
-                Carabobo, Venezuela
-              </p>
-              
-              {/* Título principal */}
-              <div className="space-y-0">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-sans uppercase leading-none break-words">
-                  RIFAS
-                </h1>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-sans uppercase leading-none mt-1 break-words">
-                  CAMIGANGA
-                </h1>
-              </div>
-              
-              {/* Subtítulo */}
-              <p className="text-white text-lg md:text-xl font-sans mt-4">
-                RIFAS CAMIGANGA
-              </p>
-              
-              {/* Botón */}
-              <div className="pt-4 flex justify-center md:justify-start">
-                <Link href="/eventos">
-                  <Button 
-                    className="bg-[#948f30] hover:bg-[#a39d40] text-white font-bold px-6 md:px-8 py-3 md:py-4 rounded-xl uppercase tracking-wide transition-colors font-sans text-sm md:text-base whitespace-nowrap"
-                  >
-                    LISTA DE DISPONIBLES
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>

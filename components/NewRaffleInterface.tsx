@@ -243,123 +243,82 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-4 w-full overflow-x-hidden">
         <div className="space-y-6">
-          {/* Raffle Info and Ticket Selection */}
-          <div className="space-y-4">
-            {/* Raffle Information */}
-            <Card className="bg-white shadow-lg overflow-hidden">
-              {/* Total Bar */}
-            
-              
-              {/* Date Bar */}
-           
-
-              <CardContent className="p-4">
-                <div className="flex flex-col lg:flex-row gap-4">
-                  {/* Prize Image */}
-                  <div className="flex-shrink-0">
-                    <div className="relative w-full lg:w-64 h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src={raffle.image || "/placeholder.svg"}
-                        alt={raffle.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Raffle Details */}
-                  <div className="flex-1 space-y-3">
-                    <div className="text-center">
-                      <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                         {raffle.title} 
-                      </h2>
-                    </div>
-
-                    <div className="space-y-2 text-sm text-gray-700">
-                      <p><strong>JUEGA:</strong> {new Date(raffle.drawDate).toLocaleDateString("es-VE", { 
-                        day: "numeric", 
-                        month: "long", 
-                        year: "numeric",
-                        timeZone: "America/Caracas"
-                      })} POR EL SORTEO {new Date(raffle.drawDate).toLocaleTimeString("es-VE", { 
-                        hour: "2-digit", 
-                        minute: "2-digit",
-                        hour12: true,
-                        timeZone: "America/Caracas"
-                      })}</p>
-                      
-                      <div>
-                        <p className="font-semibold">PREMIO PRINCIPAL:</p>
-                        <pre className="whitespace-pre-wrap">{raffle.description}</pre>
-                      </div>
-
-                      <div>
-                        <p className="font-semibold">VALOR DEL BOLETO:</p>
-                        <p>Bs {raffle.ticketPrice.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                      </div>
-
-                     
-                    </div>
-                  </div>
+          {/* 1. PRIMERO: Imagen y Título */}
+          <Card className="bg-white shadow-lg overflow-hidden">
+            <CardContent className="p-4">
+              <div className="flex flex-col items-center gap-4">
+                {/* Imagen */}
+                <div className="relative w-full max-w-md h-64 rounded-lg overflow-hidden">
+                  <Image
+                    src={raffle.image || "/placeholder.svg"}
+                    alt={raffle.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Ticket Selection */}
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-4">
+                
                 {/* Título */}
-                <h3 className="text-3xl text-[#948f30] text-center mb-6" style={{ fontFamily: 'sans-serif', fontWeight: 900 }}>CANTIDAD DE BOLETOS</h3>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
+                  {raffle.title}
+                </h2>
+              </div>
+            </CardContent>
+          </Card>
 
-                {/* Quantity Selector */}
-                <div className="flex items-center justify-center space-x-4 mb-6">
-                  {/* Botón menos - circular gris claro */}
-                  <button
-                    onClick={() => {
-                      if (ticketQuantity > 1) {
-                        setTicketQuantity(prev => prev - 1)
-                      }
-                    }}
-                    disabled={ticketQuantity <= 1}
-                    className="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-white font-bold text-lg"
-                  >
-                    -
-                  </button>
+          {/* 2. SEGUNDO: Comprar Boleto */}
+          <Card className="bg-white shadow-lg">
+            <CardContent className="p-4">
+              {/* Título */}
+              <h3 className="text-3xl text-[#948f30] text-center mb-6" style={{ fontFamily: 'sans-serif', fontWeight: 900 }}>CANTIDAD DE BOLETOS</h3>
 
-                  {/* Número central con "BOLETO" debajo */}
-                  <div className="flex flex-col items-center">
-                    <span className="text-4xl font-bold text-[#948f30]" style={{ fontFamily: 'sans-serif' }}>
-                      {ticketQuantity}
-                    </span>
-                    <span className="text-sm text-gray-600 mt-1" style={{ fontFamily: 'sans-serif' }}>BOLETO{ticketQuantity !== 1 ? 'S' : ''}</span>
-                  </div>
+              {/* Quantity Selector */}
+              <div className="flex items-center justify-center space-x-4 mb-6">
+                {/* Botón menos - circular gris claro */}
+                <button
+                  onClick={() => {
+                    if (ticketQuantity > 1) {
+                      setTicketQuantity(prev => prev - 1)
+                    }
+                  }}
+                  disabled={ticketQuantity <= 1}
+                  className="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-white font-bold text-lg"
+                >
+                  -
+                </button>
 
-                  {/* Botón más - circular azul oscuro */}
-                  <button
-                    onClick={() => {
-                      if (availableTickets.length > ticketQuantity) {
-                        setTicketQuantity(prev => prev + 1)
-                      }
-                    }}
-                    disabled={availableTickets.length <= ticketQuantity}
-                    className="w-10 h-10 rounded-full bg-[#948f30] hover:bg-[#a39d40] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-white font-bold text-lg"
-                  >
-                    +
-                  </button>
+                {/* Número central con "BOLETO" debajo */}
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl font-bold text-[#948f30]" style={{ fontFamily: 'sans-serif' }}>
+                    {ticketQuantity}
+                  </span>
+                  <span className="text-sm text-gray-600 mt-1" style={{ fontFamily: 'sans-serif' }}>BOLETO{ticketQuantity !== 1 ? 'S' : ''}</span>
                 </div>
 
-                {/* Total */}
-                <div className="text-center mb-4">
-                  <p className="text-2xl font-bold text-[#948f30]" style={{ fontFamily: 'sans-serif' }}>
-                    Total: Bs {(raffle.ticketPrice * ticketQuantity).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-2" style={{ fontFamily: 'sans-serif' }}>
-                    Los números se asignarán aleatoriamente
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                {/* Botón más - circular azul oscuro */}
+                <button
+                  onClick={() => {
+                    if (availableTickets.length > ticketQuantity) {
+                      setTicketQuantity(prev => prev + 1)
+                    }
+                  }}
+                  disabled={availableTickets.length <= ticketQuantity}
+                  className="w-10 h-10 rounded-full bg-[#948f30] hover:bg-[#a39d40] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-white font-bold text-lg"
+                >
+                  +
+                </button>
+              </div>
+
+              {/* Total */}
+              <div className="text-center mb-4">
+                <p className="text-2xl font-bold text-[#948f30]" style={{ fontFamily: 'sans-serif' }}>
+                  Total: Bs {(raffle.ticketPrice * ticketQuantity).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="text-sm text-gray-500 mt-2" style={{ fontFamily: 'sans-serif' }}>
+                  Los números se asignarán aleatoriamente
+                </p>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Personal Data and Payment */}
           <div className="space-y-4">
@@ -615,11 +574,43 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
               </CardContent>
             </Card>
           </div>
-        </div>
 
-        {/* Ticket Verifier */}
-        <div id="tickets-page" className="mt-6 scroll-mt-20">
-          <TicketVerifier raffleId={raffle._id} initialEmail={initialEmail || emailFromUrl} />
+          {/* Ticket Verifier */}
+          <div id="tickets-page" className="scroll-mt-20">
+            <TicketVerifier raffleId={raffle._id} initialEmail={initialEmail || emailFromUrl} />
+          </div>
+
+          {/* ÚLTIMO: Descripción */}
+          <Card className="bg-white shadow-lg overflow-hidden">
+            <CardContent className="p-4">
+              <div className="space-y-3">
+                <div className="space-y-2 text-sm text-gray-700">
+                  <p><strong>JUEGA:</strong> {new Date(raffle.drawDate).toLocaleDateString("es-VE", { 
+                    day: "numeric", 
+                    month: "long", 
+                    year: "numeric",
+                    timeZone: "America/Caracas"
+                  })} POR EL SORTEO {new Date(raffle.drawDate).toLocaleTimeString("es-VE", { 
+                    hour: "2-digit", 
+                    minute: "2-digit",
+                    hour12: true,
+                    timeZone: "America/Caracas"
+                  })}</p>
+                  
+                  <div>
+                    <p className="font-semibold">PREMIO PRINCIPAL:</p>
+                    <pre className="whitespace-pre-wrap">{raffle.description}</pre>
+                  </div>
+
+                  <div>
+                    <p className="font-semibold">VALOR DEL BOLETO:</p>
+                    <p>Bs {raffle.ticketPrice.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
         </div>
       </main>
 

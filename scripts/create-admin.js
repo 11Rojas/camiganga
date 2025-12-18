@@ -26,7 +26,7 @@ async function connectDB() {
   if (!uri) throw new Error('MONGODB_URI is not set. Set env or add to .env.local')
   if (mongoose.connection.readyState === 1) return
   await mongoose.connect(uri, {
-    dbName: undefined,
+    dbName: "camiganga",
   })
 }
 
