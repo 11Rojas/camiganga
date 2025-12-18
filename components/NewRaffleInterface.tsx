@@ -322,97 +322,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
 
           {/* Personal Data and Payment */}
           <div className="space-y-4">
-            {/* Personal Data Form */}
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-8 h-8 bg-[#948f30] rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-[#948f30]">DATOS PERSONALES</h3>
-                </div>
-                
-                <div className="space-y-3">
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Nombres y Apellidos *
-                    </Label>
-                    <Input
-                      value={personalData.names}
-                      onChange={(e) => setPersonalData(prev => ({ ...prev, names: e.target.value }))}
-                      className="h-10 text-sm placeholder:text-white"
-                      placeholder="Ingresa tu nombre completo"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Cédula *
-                    </Label>
-                    <Input
-                      value={personalData.id}
-                      onChange={(e) => setPersonalData(prev => ({ ...prev, id: e.target.value }))}
-                      className="h-10 text-sm placeholder:text-white"
-                      placeholder="Ingresa tu cédula"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Teléfono *
-                    </Label>
-                    <div className="flex items-center space-x-2">
-                 
-                      <Input
-                        value={personalData.phone}
-                        onChange={(e) => setPersonalData(prev => ({ ...prev, phone: e.target.value }))}
-                        className="flex-1 h-10 text-sm placeholder:text-white"
-                        placeholder="Número de teléfono"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Referencia de Pago (últimos 6 dígitos) *
-                    </Label>
-                    <Input
-                      value={personalData.paymentRef}
-                      onChange={(e) => setPersonalData(prev => ({ ...prev, paymentRef: e.target.value }))}
-                      className="h-10 text-sm placeholder:text-white"
-                      placeholder="Últimos 6 dígitos de la referencia"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Titular de la cuenta
-                    </Label>
-                    <Input
-                      value={personalData.accountHolder}
-                      onChange={(e) => setPersonalData(prev => ({ ...prev, accountHolder: e.target.value }))}
-                      className="h-10 text-sm placeholder:text-white"
-                      placeholder="Nombre del titular de la cuenta"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
-                      Email *
-                    </Label>
-                    <Input
-                      type="email"
-                      value={personalData.email}
-                      onChange={(e) => setPersonalData(prev => ({ ...prev, email: e.target.value }))}
-                      className="h-10 text-sm placeholder:text-white"
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Payment Methods */}
+            {/* Payment Methods - PRIMERO */}
             <Card className="bg-white shadow-lg">
               <CardContent className="p-4">
                 <div className="flex items-center space-x-3 mb-4">
@@ -506,6 +416,96 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                       <span className="font-semibold text-base">Total: Bs {totalPrice.toLocaleString("es-VE")}</span>
                       <span className="text-xs">Bolívares</span>
                     </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Personal Data Form - SEGUNDO */}
+            <Card className="bg-white shadow-lg">
+              <CardContent className="p-4">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-8 h-8 bg-[#948f30] rounded-full flex items-center justify-center">
+                    <User className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#948f30]">DATOS PERSONALES</h3>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Nombres y Apellidos *
+                    </Label>
+                    <Input
+                      value={personalData.names}
+                      onChange={(e) => setPersonalData(prev => ({ ...prev, names: e.target.value }))}
+                      className="h-10 text-sm placeholder:text-white"
+                      placeholder="Ingresa tu nombre completo"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Cédula *
+                    </Label>
+                    <Input
+                      value={personalData.id}
+                      onChange={(e) => setPersonalData(prev => ({ ...prev, id: e.target.value }))}
+                      className="h-10 text-sm placeholder:text-white"
+                      placeholder="Ingresa tu cédula"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Teléfono *
+                    </Label>
+                    <div className="flex items-center space-x-2">
+                 
+                      <Input
+                        value={personalData.phone}
+                        onChange={(e) => setPersonalData(prev => ({ ...prev, phone: e.target.value }))}
+                        className="flex-1 h-10 text-sm placeholder:text-white"
+                        placeholder="Número de teléfono"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Referencia de Pago (últimos 6 dígitos) *
+                    </Label>
+                    <Input
+                      value={personalData.paymentRef}
+                      onChange={(e) => setPersonalData(prev => ({ ...prev, paymentRef: e.target.value }))}
+                      className="h-10 text-sm placeholder:text-white"
+                      placeholder="Últimos 6 dígitos de la referencia"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Titular de la cuenta
+                    </Label>
+                    <Input
+                      value={personalData.accountHolder}
+                      onChange={(e) => setPersonalData(prev => ({ ...prev, accountHolder: e.target.value }))}
+                      className="h-10 text-sm placeholder:text-white"
+                      placeholder="Nombre del titular de la cuenta"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold text-gray-700 block mb-2">
+                      Email *
+                    </Label>
+                    <Input
+                      type="email"
+                      value={personalData.email}
+                      onChange={(e) => setPersonalData(prev => ({ ...prev, email: e.target.value }))}
+                      className="h-10 text-sm placeholder:text-white"
+                      placeholder="tu@email.com"
+                    />
                   </div>
                 </div>
               </CardContent>
