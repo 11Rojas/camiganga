@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import RaffleCard from "./RaffleCard"
 import type { Raffle } from "@/lib/types"
-
+//g
 export default function AvailableRaffles() {
   const [raffles, setRaffles] = useState<Raffle[]>([])
   const [loading, setLoading] = useState(true)
