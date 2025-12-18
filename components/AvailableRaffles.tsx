@@ -4,11 +4,7 @@ import { useState, useEffect } from "react"
 import RaffleCard from "./RaffleCard"
 import type { Raffle } from "@/lib/types"
 
-interface AvailableRafflesProps {
-  onRaffleSelect?: (raffle: Raffle) => void
-}
-
-export default function AvailableRaffles({ onRaffleSelect }: AvailableRafflesProps) {
+export default function AvailableRaffles() {
   const [raffles, setRaffles] = useState<Raffle[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -64,11 +60,7 @@ export default function AvailableRaffles({ onRaffleSelect }: AvailableRafflesPro
         {/* Grid de tarjetas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {raffles.map((raffle) => (
-            <RaffleCard 
-              key={raffle._id} 
-              raffle={raffle} 
-              onSelect={onRaffleSelect}
-            />
+            <RaffleCard key={raffle._id} raffle={raffle} />
           ))}
         </div>
       </div>

@@ -1,15 +1,15 @@
 "use client"
 
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
 import { Calendar } from "lucide-react"
 import type { Raffle } from "@/lib/types"
 
 interface RaffleCardProps {
   raffle: Raffle
-  onSelect?: (raffle: Raffle) => void
 }
 
-export default function RaffleCard({ raffle, onSelect }: RaffleCardProps) {
+export default function RaffleCard({ raffle }: RaffleCardProps) {
   // Calcular progreso
   const totalNumbers = raffle.totalNumbers || 100
   const soldNumbers = raffle.soldNumbers?.length || 0
@@ -25,10 +25,7 @@ export default function RaffleCard({ raffle, onSelect }: RaffleCardProps) {
   })
 
   return (
-    <div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-      onClick={() => onSelect?.(raffle)}
-    >
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
       {/* Imagen de la rifa */}
       <div className="relative w-full h-64">
         <Image
@@ -69,6 +66,14 @@ export default function RaffleCard({ raffle, onSelect }: RaffleCardProps) {
           </div>
         </div>
 
+        {/* Botón */}
+        <a href={`/rifa/${raffle._id}`}>
+          <Button 
+            className="w-full bg-[#948f30] hover:bg-[#a39d40] text-white font-bold py-3 rounded-lg uppercase tracking-wide transition-colors"
+          >
+            COMPRAR TICKETS
+          </Button>
+        </a>
       </div>
     </div>
   )
