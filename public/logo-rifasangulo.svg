@@ -1,0 +1,18 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Car silhouette -->
+  <path d="M20 25 L25 20 L35 20 L40 25 L45 25 L50 30 L50 35 L45 40 L40 40 L35 35 L25 35 L20 30 Z" fill="black"/>
+  <rect x="25" y="30" width="10" height="5" fill="white"/>
+  <rect x="35" y="30" width="10" height="5" fill="white"/>
+  
+  <!-- RIFAS text -->
+  <text x="60" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#666666" stroke="white" stroke-width="1">RIFAS</text>
+  
+  <!-- ANGULO text -->
+  <text x="60" y="55" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#DC2626" stroke="white" stroke-width="1">ANGULO</text>
+  
+  <!-- Red line -->
+  <line x1="60" y1="60" x2="180" y2="60" stroke="#DC2626" stroke-width="2"/>
+  
+  <!-- CAPACHO  C.A text -->
+  <text x="60" y="75" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#DC2626">CAPACHO 2026 C.A</text>
+</svg>
