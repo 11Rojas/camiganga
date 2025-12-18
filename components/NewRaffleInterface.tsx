@@ -46,7 +46,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [emailFromUrl, setEmailFromUrl] = useState<string>("")
 
-  const totalPrice = (raffle.ticketPrice * ticketQuantity) * exchangeRate
+  const totalPrice = raffle.ticketPrice * ticketQuantity
 
   // Leer email de la URL y hacer scroll al componente de boletos
   useEffect(() => {
@@ -295,7 +295,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
 
                       <div>
                         <p className="font-semibold">VALOR DEL BOLETO:</p>
-                        <p>USD ${raffle.ticketPrice.toFixed(2)} (Bs {(raffle.ticketPrice * exchangeRate).toLocaleString("es-VE")})</p>
+                        <p>Bs {raffle.ticketPrice.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                       </div>
 
                      
@@ -351,7 +351,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                 {/* Total */}
                 <div className="text-center mb-4">
                   <p className="text-2xl font-bold text-[#948f30]" style={{ fontFamily: 'sans-serif' }}>
-                    Total: USD {(raffle.ticketPrice * ticketQuantity).toFixed(2).replace('.', ',')}
+                    Total: Bs {(raffle.ticketPrice * ticketQuantity).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </p>
                   <p className="text-sm text-gray-500 mt-2" style={{ fontFamily: 'sans-serif' }}>
                     Los números se asignarán aleatoriamente
@@ -1053,7 +1053,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-500">Precio:</span>
                           <span className="font-semibold text-[#948f30]">
-                            ${otherRaffle.ticketPrice.toFixed(2)}
+                            Bs {otherRaffle.ticketPrice.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </span>
                         </div>
                       </div>

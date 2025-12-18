@@ -242,7 +242,7 @@ const [number, setNumber] = useState<number>(0);
                 </div>
                 <div>
                   <Label htmlFor="ticketPrice" className="text-black text-sm sm:text-base font-semibold">
-                    Precio por Número ($)
+                    Precio por Número (Bs)
                   </Label>
                   <Input
                     id="ticketPrice"
@@ -380,7 +380,7 @@ const [number, setNumber] = useState<number>(0);
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
                     <div className="flex items-center text-xs sm:text-sm">
                       <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-blue-600" />
-                      <span className="text-gray-700">Precio: ${raffle.ticketPrice}</span>
+                      <span className="text-gray-700">Precio: Bs {raffle.ticketPrice.toLocaleString("es-VE")}</span>
                     </div>
                     <div className="flex items-center text-xs sm:text-sm">
                       <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-blue-600" />
@@ -394,7 +394,7 @@ const [number, setNumber] = useState<number>(0);
                     </div>
                     <div className="flex items-center text-xs sm:text-sm">
                       <span className="text-blue-600 font-bold">
-                        Ingresos: ${((raffle.soldNumbers?.length || 0) * raffle.ticketPrice).toFixed(2)}
+                        Ingresos: Bs {((raffle.soldNumbers?.length || 0) * raffle.ticketPrice).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </span>
                     </div>
                   </div>

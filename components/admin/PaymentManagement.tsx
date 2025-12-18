@@ -229,7 +229,7 @@ export default function PaymentManagement() {
         <Card className="bg-white border-gray-200 shadow-sm">
           <CardContent className="p-3 sm:p-4">
             <div className="text-center">
-              <div className="text-lg sm:text-2xl font-bold text-gray-800">${stats.totalToday.toFixed(2)}</div>
+              <div className="text-lg sm:text-2xl font-bold text-gray-800">Bs {stats.totalToday.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
               <div className="text-xs sm:text-sm text-gray-600">Total Hoy</div>
             </div>
           </CardContent>
@@ -393,7 +393,7 @@ export default function PaymentManagement() {
 </div>
                     <div>
                       <span className="text-gray-600">Monto:</span>
-                      <p className="text-gray-800 font-bold">${purchase.totalAmount.toFixed(2)}</p>
+                      <p className="text-gray-800 font-bold">Bs {purchase.totalAmount.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                     <div>
                       <span className="text-gray-600">Referencia:</span>
@@ -498,7 +498,7 @@ export default function PaymentManagement() {
         </div>
       </div>
                   <p className="text-white text-sm sm:text-base">
-                    <strong>Total:</strong> ${selectedPurchase.totalAmount.toFixed(2)}
+                    <strong>Total:</strong> Bs {selectedPurchase.totalAmount.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </p>
                 </div>
               </div>

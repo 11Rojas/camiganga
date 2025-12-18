@@ -221,7 +221,7 @@ export default function MobileTicketVerifier() {
                           </span>
                         </div>
                         <p className="text-sm">
-                          <strong>Monto:</strong> ${ticket.totalAmount.toFixed(2)} USD
+                          <strong>Monto:</strong> Bs {ticket.totalAmount.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </p>
                         <p className="text-sm">
                           <strong>Método:</strong> {ticket.paymentMethod.toUpperCase()}
