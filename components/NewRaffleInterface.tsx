@@ -585,18 +585,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
             <CardContent className="p-4">
               <div className="space-y-3">
                 <div className="space-y-2 text-sm text-gray-700">
-                  <p><strong>JUEGA:</strong> {new Date(raffle.drawDate).toLocaleDateString("es-VE", { 
-                    day: "numeric", 
-                    month: "long", 
-                    year: "numeric",
-                    timeZone: "America/Caracas"
-                  })} POR EL SORTEO {new Date(raffle.drawDate).toLocaleTimeString("es-VE", { 
-                    hour: "2-digit", 
-                    minute: "2-digit",
-                    hour12: true,
-                    timeZone: "America/Caracas"
-                  })}</p>
-                  
+                 
                   <div>
                     <p className="font-semibold">PREMIO PRINCIPAL:</p>
                     <pre className="whitespace-pre-wrap">{raffle.description}</pre>

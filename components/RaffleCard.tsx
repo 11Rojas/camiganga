@@ -13,7 +13,8 @@ export default function RaffleCard({ raffle }: RaffleCardProps) {
   // Calcular progreso
   const totalNumbers = raffle.totalNumbers || 100
   const soldNumbers = raffle.soldNumbers?.length || 0
-  const progress = totalNumbers > 0 ? (soldNumbers / totalNumbers) * 100 : 0
+  const baseProgress = totalNumbers > 0 ? (soldNumbers / totalNumbers) * 100 : 0
+  const progress = Math.max(baseProgress, 36)
 
   // Formatear fecha
   const drawDate = new Date(raffle.drawDate)
@@ -60,8 +61,7 @@ export default function RaffleCard({ raffle }: RaffleCardProps) {
               style={{ width: `${Math.min(Math.max(progress, 0), 100)}%` }}
             ></div>
           </div>
-          <div className="flex justify-between items-center text-sm text-gray-600">
-            <span className="font-semibold">{soldNumbers} / {totalNumbers}</span>
+          <div className="flex justify-center items-center text-sm text-gray-600">
             <span className="font-semibold">{progress.toFixed(1)}%</span>
           </div>
         </div>

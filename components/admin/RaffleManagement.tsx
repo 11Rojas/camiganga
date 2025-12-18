@@ -416,13 +416,13 @@ const [number, setNumber] = useState<number>(0);
                   <div className="mb-3 sm:mb-4">
                     <div className="flex justify-between text-xs sm:text-sm text-gray-400 mb-1">
                       <span>Progreso de venta</span>
-                      <span>{(((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100).toFixed(1)}%</span>
+                      <span>{Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), 36).toFixed(1)}%</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
                       <div
                         className="bg-gradient-to-r from-yellow-400 to-yellow-600 h-1.5 sm:h-2 rounded-full"
                         style={{
-                          width: `${((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100}%`,
+                          width: `${Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), 36)}%`,
                         }}
                       />
                     </div>
