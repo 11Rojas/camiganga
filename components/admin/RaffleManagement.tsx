@@ -189,12 +189,27 @@ const [number, setNumber] = useState<number>(0);
 
   const startEdit = (raffle: Raffle) => {
     setEditingRaffle(raffle)
+    
+    // Convertir la fecha de UTC a hora local de Venezuela (UTC-4)
+    // La fecha viene en UTC de la base de datos, necesitamos restar 4 horas
+    const utcDate = new Date(raffle.drawDate)
+    // Restar 4 horas (4 * 60 * 60 * 1000 milisegundos)
+    const venezuelaTime = new Date(utcDate.getTime() - (4 * 60 * 60 * 1000))
+    
+    // Formatear para datetime-local (YYYY-MM-DDTHH:mm) usando los valores UTC de la fecha ajustada
+    const year = venezuelaTime.getUTCFullYear()
+    const month = String(venezuelaTime.getUTCMonth() + 1).padStart(2, '0')
+    const day = String(venezuelaTime.getUTCDate()).padStart(2, '0')
+    const hours = String(venezuelaTime.getUTCHours()).padStart(2, '0')
+    const minutes = String(venezuelaTime.getUTCMinutes()).padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`
+    
     setFormData({
       title: raffle.title,
       description: raffle.description,
       ticketPrice: raffle.ticketPrice.toString(),
       totalNumbers: raffle.totalNumbers.toString(),
-      drawDate: new Date(raffle.drawDate).toISOString().slice(0, 16),
+      drawDate: formattedDate,
       image: raffle.image || ""
     })
     setShowCreateForm(true)
