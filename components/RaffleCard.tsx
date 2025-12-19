@@ -24,6 +24,12 @@ export default function RaffleCard({ raffle }: RaffleCardProps) {
     year: "numeric",
     timeZone: "America/Caracas"
   })
+  
+  // Obtener el día usando la zona horaria de Venezuela
+  const dayInVenezuela = drawDate.toLocaleDateString("es-VE", {
+    day: "numeric",
+    timeZone: "America/Caracas"
+  })
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -49,7 +55,7 @@ export default function RaffleCard({ raffle }: RaffleCardProps) {
           <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded border border-gray-300">
             <Calendar className="w-4 h-4 text-gray-600" />
           </div>
-          <span className="font-semibold text-lg">{drawDate.getDate()}</span>
+          <span className="font-semibold text-lg">{dayInVenezuela}</span>
           <span>{formattedDate}</span>
         </div>
 

@@ -249,7 +249,7 @@ export default function ExchangeRateManager() {
                   )}
                 </div>
                 <div className="text-left sm:text-right">
-                  <div className="text-gray-400 text-xs sm:text-sm">{new Date(entry.createdAt).toLocaleString("es-VE")}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">{new Date(entry.createdAt).toLocaleString("es-VE", { timeZone: "America/Caracas" })}</div>
                   <div className="text-gray-500 text-xs">por {entry.updatedBy?.name || "Sistema"}</div>
                 </div>
               </div>

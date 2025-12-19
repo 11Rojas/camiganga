@@ -179,8 +179,10 @@ export default function PaymentManagement() {
     rejected: purchases.filter((p) => p.status === "rejected").length,
     totalToday: purchases
       .filter((p) => {
-        const today = new Date().toDateString()
-        return new Date(p.createdAt).toDateString() === today && p.status === "approved"
+        const now = new Date()
+        const todayInVenezuela = now.toLocaleDateString("en-US", { timeZone: "America/Caracas" })
+        const purchaseDateInVenezuela = new Date(p.createdAt).toLocaleDateString("en-US", { timeZone: "America/Caracas" })
+        return purchaseDateInVenezuela === todayInVenezuela && p.status === "approved"
       })
       .reduce((sum, p) => sum + p.totalAmount, 0),
   }
@@ -401,7 +403,7 @@ export default function PaymentManagement() {
                     </div>
                     <div>
                       <span className="text-gray-600">Fecha:</span>
-                      <p className="text-gray-800">{new Date(purchase.createdAt).toLocaleString("es-VE")}</p>
+                      <p className="text-gray-800">{new Date(purchase.createdAt).toLocaleString("es-VE", { timeZone: "America/Caracas" })}</p>
                     </div>
                   </div>
                 </div>
