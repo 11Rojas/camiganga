@@ -364,12 +364,12 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">TELÉFONO</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                          04161724994
+                          04128393072
                           </span>
                           <Button 
                             size="sm" 
                             className="w-6 h-6 rounded-full bg-[#948f30] hover:bg-[#a39d40] p-0"
-                            onClick={() => copyToClipboard("04161724994")}
+                            onClick={() => copyToClipboard("04128393072")}
                           >
                             <Copy className="w-2 h-2 text-white" />
                           </Button>
@@ -380,12 +380,12 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">C.I</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                            17589148
+                            15903799
                           </span>
                           <Button 
                             size="sm" 
                             className="w-6 h-6 rounded-full bg-[#948f30] hover:bg-[#a39d40] p-0"
-                            onClick={() => copyToClipboard("17589148")}
+                            onClick={() => copyToClipboard("15903799")}
                           >
                             <Copy className="w-2 h-2 text-white" />
                           </Button>
