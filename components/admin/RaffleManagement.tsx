@@ -54,6 +54,7 @@ const [number, setNumber] = useState<number>(0);
     ticketPrice: "",
     totalNumbers: "",
     drawDate: "",
+    initialProgress: "0",
     image: ""
   })
 
@@ -92,6 +93,7 @@ const [number, setNumber] = useState<number>(0);
       formDataToSend.append('ticketPrice', formData.ticketPrice)
       formDataToSend.append('totalNumbers', formData.totalNumbers)
       formDataToSend.append('drawDate', formData.drawDate)
+      formDataToSend.append('initialProgress', formData.initialProgress)
       
       if (imageFile) {
         formDataToSend.append('image', imageFile)
@@ -179,6 +181,7 @@ const [number, setNumber] = useState<number>(0);
       ticketPrice: "",
       totalNumbers: "",
       drawDate: "",
+      initialProgress: "0",
       image: ""
     })
     setImageFile(null)
@@ -210,6 +213,7 @@ const [number, setNumber] = useState<number>(0);
       ticketPrice: raffle.ticketPrice.toString(),
       totalNumbers: raffle.totalNumbers.toString(),
       drawDate: formattedDate,
+      initialProgress: (raffle.initialProgress || 0).toString(),
       image: raffle.image || ""
     })
     setShowCreateForm(true)
@@ -287,7 +291,7 @@ const [number, setNumber] = useState<number>(0);
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div>
                   <Label htmlFor="totalNumbers" className="text-black text-sm sm:text-base font-semibold">
                     Total de Números
@@ -300,6 +304,22 @@ const [number, setNumber] = useState<number>(0);
                     className="bg-white border-gray-300 text-black placeholder:text-gray-500 text-sm sm:text-base"
                     placeholder="100"
                     required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="initialProgress" className="text-black text-sm sm:text-base font-semibold">
+                    Porcentaje Inicial (%)
+                  </Label>
+                  <Input
+                    id="initialProgress"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    value={formData.initialProgress}
+                    onChange={(e) => setFormData({ ...formData, initialProgress: e.target.value })}
+                    className="bg-white border-gray-300 text-black placeholder:text-gray-500 text-sm sm:text-base"
+                    placeholder="0"
                   />
                 </div>
                 <div>
@@ -431,13 +451,13 @@ const [number, setNumber] = useState<number>(0);
                   <div className="mb-3 sm:mb-4">
                     <div className="flex justify-between text-xs sm:text-sm text-gray-400 mb-1">
                       <span>Progreso de venta</span>
-                      <span>{Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), 36).toFixed(1)}%</span>
+                      <span>{Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), (raffle.initialProgress || 0)).toFixed(1)}%</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
                       <div
                         className="bg-gradient-to-r from-yellow-400 to-yellow-600 h-1.5 sm:h-2 rounded-full"
                         style={{
-                          width: `${Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), 36)}%`,
+                          width: `${Math.max((((raffle.soldNumbers?.length || 0) / raffle.totalNumbers) * 100), (raffle.initialProgress || 0))}%`,
                         }}
                       />
                     </div>

@@ -17,6 +17,7 @@ export interface Raffle {
   totalNumbers: number
   soldNumbers?: number[]
   drawDate: string
+  initialProgress?: number
   status: "active" | "completed" | "cancelled"
   winner?: {
     userId: string

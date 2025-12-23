@@ -8,6 +8,7 @@ const raffleSchema = new mongoose.Schema({
   totalNumbers: { type: Number, required: true },
   soldNumbers: { type: [Number], default: [] },
   drawDate: { type: Date, required: true },
+  initialProgress: { type: Number, default: 0 },
   status: {
     type: String,
     enum: ["active", "completed", "cancelled"],

@@ -14,7 +14,8 @@ export default function RaffleCard({ raffle }: RaffleCardProps) {
   const totalNumbers = raffle.totalNumbers || 100
   const soldNumbers = raffle.soldNumbers?.length || 0
   const baseProgress = totalNumbers > 0 ? (soldNumbers / totalNumbers) * 100 : 0
-  const progress = Math.max(baseProgress, 36)
+  const initialProgress = raffle.initialProgress || 0
+  const progress = Math.max(baseProgress, initialProgress)
 
   // Formatear fecha
   const drawDate = new Date(raffle.drawDate)

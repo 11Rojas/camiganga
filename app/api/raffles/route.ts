@@ -58,6 +58,7 @@ export async function POST(req: Request) {
     const ticketPrice = parseFloat(formData.get("ticketPrice") as string);
     const totalNumbers = parseInt(formData.get("totalNumbers") as string);
     const drawDate = formData.get("drawDate") as string;
+    const initialProgress = parseFloat(formData.get("initialProgress") as string) || 0;
     const imageFile = formData.get("image") as File | null;
 
     let imageUrl = "";
@@ -102,6 +103,7 @@ export async function POST(req: Request) {
       ticketPrice,
       totalNumbers,
       drawDate: utcDate,
+      initialProgress,
       status: "active",
       image: imageUrl,
     });
