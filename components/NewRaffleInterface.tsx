@@ -364,7 +364,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">TELÉFONO</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                          04128393072
+                          04147667685
                           </span>
                           <Button 
                             size="sm" 
@@ -380,7 +380,7 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">C.I</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                            15903799
+                            13338776
                           </span>
                           <Button 
                             size="sm" 
