@@ -45,8 +45,35 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
   const [successEmail, setSuccessEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [emailFromUrl, setEmailFromUrl] = useState<string>("")
+  const [paymentSettings, setPaymentSettings] = useState({
+    phone: "04128393072",
+    ci: "15903799",
+    bank: "0104",
+    bankName: "BANCO VENEZOLANO DE CREDITO",
+  })
 
   const totalPrice = raffle.ticketPrice * ticketQuantity
+
+  // Cargar configuración de pago
+  useEffect(() => {
+    const fetchPaymentSettings = async () => {
+      try {
+        const response = await fetch("/api/payment-settings")
+        if (response.ok) {
+          const data = await response.json()
+          setPaymentSettings({
+            phone: data.phone || "04128393072",
+            ci: data.ci || "15903799",
+            bank: data.bank || "0104",
+            bankName: data.bankName || "BANCO VENEZOLANO DE CREDITO",
+          })
+        }
+      } catch (error) {
+        console.error("Error fetching payment settings:", error)
+      }
+    }
+    fetchPaymentSettings()
+  }, [])
 
   // Leer email de la URL y hacer scroll al componente de boletos
   useEffect(() => {
@@ -364,12 +391,12 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">TELÉFONO</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                          04128393072
+                            {paymentSettings.phone}
                           </span>
                           <Button 
                             size="sm" 
                             className="w-6 h-6 rounded-full bg-[#948f30] hover:bg-[#a39d40] p-0"
-                            onClick={() => copyToClipboard("04128393072")}
+                            onClick={() => copyToClipboard(paymentSettings.phone)}
                           >
                             <Copy className="w-2 h-2 text-white" />
                           </Button>
@@ -380,13 +407,12 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                         <span className="text-sm font-bold text-gray-800">C.I</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                            15903799
-                      
+                            {paymentSettings.ci}
                           </span>
                           <Button 
                             size="sm" 
                             className="w-6 h-6 rounded-full bg-[#948f30] hover:bg-[#a39d40] p-0"
-                            onClick={() => copyToClipboard("15903799")}
+                            onClick={() => copyToClipboard(paymentSettings.ci)}
                           >
                             <Copy className="w-2 h-2 text-white" />
                           </Button>
@@ -394,15 +420,15 @@ export default function NewRaffleInterface({ raffle, exchangeRate, onRaffleChang
                       </div>
                       
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-bold text-gray-800">BANCO VENEZOLANO DE CREDITO</span>
+                        <span className="text-sm font-bold text-gray-800">{paymentSettings.bankName}</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-xs font-mono bg-black px-2 py-1 rounded">
-                            0104
+                            {paymentSettings.bank}
                           </span>
                           <Button 
                             size="sm" 
                             className="w-6 h-6 rounded-full bg-[#948f30] hover:bg-[#a39d40] p-0"
-                            onClick={() => copyToClipboard("0104")}
+                            onClick={() => copyToClipboard(paymentSettings.bank)}
                           >
                             <Copy className="w-2 h-2 text-white" />
                           </Button>

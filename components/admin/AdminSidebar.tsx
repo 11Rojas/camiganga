@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { LayoutDashboard, Trophy, CreditCard, DollarSign, BarChart3, Home, Sparkles, Menu, X } from "lucide-react"
+import { LayoutDashboard, Trophy, CreditCard, DollarSign, BarChart3, Home, Sparkles, Menu, X, Smartphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface AdminSidebarProps {
@@ -18,6 +18,7 @@ export default function AdminSidebar({ currentView, onViewChange }: AdminSidebar
     { id: "raffles", label: "Gestión de Rifas", icon: Trophy },
     { id: "payments", label: "Pagos", icon: CreditCard },
     { id: "exchange", label: "Tasa de Cambio", icon: DollarSign },
+    { id: "payment-settings", label: "Datos de Pago", icon: Smartphone },
   ]
 
   const handleMenuClick = (viewId: string) => {
