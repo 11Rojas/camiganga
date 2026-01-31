@@ -3,16 +3,8 @@ import { connectDB } from "@/lib/mongodb"
 import { Purchase } from "@/models/Purchase"
 import Raffle from "@/models/Raffle"
 import { requireAuth } from "@/lib/auth"
-import { v2 as cloudinary } from 'cloudinary'
+import { uploadToOpeninary } from "@/lib/openinary"
 import { sendPurchaseNotification } from "@/lib/mailer"
-
-// Configura Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true
-})
 
 export async function POST(request: NextRequest) {
   try {
@@ -81,43 +73,26 @@ export async function POST(request: NextRequest) {
     // Verificar disponibilidad de números seleccionados
     const totalNumbers = raffle.totalNumbers || 0
     const soldNumbers = raffle.soldNumbers || []
-    
+
     // Validar que los números seleccionados estén disponibles
-    const unavailableNumbers = selectedNumbers.filter(num => 
+    const unavailableNumbers = selectedNumbers.filter(num =>
       soldNumbers.includes(parseInt(num)) || parseInt(num) < 1 || parseInt(num) > totalNumbers
     )
-    
+
     if (unavailableNumbers.length > 0) {
       return NextResponse.json(
-        { error: `Los siguientes números no están disponibles: ${unavailableNumbers.join(", ")}` }, 
+        { error: `Los siguientes números no están disponibles: ${unavailableNumbers.join(", ")}` },
         { status: 400 }
       )
     }
-    
+
     // Usar los números seleccionados por el usuario
     const assignedNumbers = selectedNumbers.sort((a, b) => parseInt(a) - parseInt(b))
 
-    // Subir comprobante a Cloudinary
+    // Subir comprobante a Openinary
     let receiptUrl = ""
     if (receiptFile) {
-      const arrayBuffer = await receiptFile.arrayBuffer()
-      const buffer = Buffer.from(arrayBuffer)
-
-      const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          { 
-            folder: "receipts",
-            resource_type: "auto",
-            allowed_formats: ['jpg', 'jpeg', 'png', 'pdf']
-          },
-          (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          }
-        ).end(buffer)
-      })
-
-      receiptUrl = (result as any)?.secure_url || ""
+      receiptUrl = await uploadToOpeninary(receiptFile, 'receipts')
     }
 
     // Calcular monto total

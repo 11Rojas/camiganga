@@ -32,3 +32,4 @@ const PaymentSettingsSchema = new mongoose.Schema(
 export const PaymentSettings = mongoose.models.PaymentSettings || mongoose.model("PaymentSettings", PaymentSettingsSchema)
 
 
+

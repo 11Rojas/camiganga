@@ -2,14 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/mongodb"
 import Raffle from "@/models/Raffle"
 import { requireAdmin } from "@/lib/auth"
-import { v2 as cloudinary } from "cloudinary"
-
-// Configurar Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+import { uploadToOpeninary } from "@/lib/openinary"
 
 export async function GET(
   request: NextRequest,
@@ -17,18 +10,18 @@ export async function GET(
 ) {
   try {
     await connectDB()
-    
+
     const { id } = await params
-    
+
     const raffle = await (Raffle as any).findById(id)
-    
+
     if (!raffle) {
       return NextResponse.json(
         { error: "Rifa no encontrada" },
         { status: 404 }
       )
     }
-    
+
     return NextResponse.json(raffle)
   } catch (error) {
     console.error("Error fetching raffle:", error)
@@ -48,9 +41,9 @@ export async function PUT(
     if (session instanceof NextResponse) return session
 
     await connectDB()
-    
+
     const { id } = await params
-    
+
     // Verificar que la rifa existe
     const existingRaffle = await Raffle.findById(id)
     if (!existingRaffle) {
@@ -72,26 +65,9 @@ export async function PUT(
 
     let imageUrl = currentImage || existingRaffle.image
 
-    // Subir nueva imagen a Cloudinary si existe
+    // Subir nueva imagen a Openinary si existe
     if (imageFile) {
-      const arrayBuffer = await imageFile.arrayBuffer()
-      const buffer = Buffer.from(arrayBuffer)
-
-      const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          { folder: "rifas", resource_type: "auto" },
-          (error, result) => {
-            if (error) {
-              console.error("Cloudinary upload error:", error)
-              reject(error)
-              return
-            }
-            resolve(result)
-          }
-        ).end(buffer)
-      }) as any
-
-      imageUrl = result.secure_url
+      imageUrl = await uploadToOpeninary(imageFile, 'rifas')
     }
 
     // Convertir la fecha de datetime-local (hora local de Venezuela) a UTC
@@ -100,7 +76,7 @@ export async function PUT(
     const [datePart, timePart] = drawDate.split('T');
     const [year, month, day] = datePart.split('-').map(Number);
     const [hours, minutes] = timePart.split(':').map(Number);
-    
+
     // Crear fecha en UTC: si el usuario ingresa 10:00 hora de Venezuela (UTC-4),
     // eso equivale a 14:00 UTC (10:00 + 4 horas)
     const utcDate = new Date(Date.UTC(year, month - 1, day, hours + 4, minutes));
@@ -140,9 +116,9 @@ export async function DELETE(
     if (session instanceof NextResponse) return session
 
     await connectDB()
-    
+
     const { id } = await params
-    
+
     // Verificar que la rifa existe
     const existingRaffle = await Raffle.findById(id)
     if (!existingRaffle) {
